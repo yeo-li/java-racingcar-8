@@ -4,6 +4,10 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 public class RacingCar {
 
+    private static final int MIN_RANDOM = 0;
+    private static final int MAX_RANDOM = 9;
+    private static final int MOVE_THRESHOLD = 4;
+
     private final String name;
     private int distance;
 
@@ -22,13 +26,13 @@ public class RacingCar {
     }
 
     public void moveForward() {
-        int moveSignal = Randoms.pickNumberInRange(0, 9);
+        int moveSignal = Randoms.pickNumberInRange(MIN_RANDOM, MAX_RANDOM);
         if (canMove(moveSignal)) {
             this.distance += 1;
         }
     }
 
     private boolean canMove(int moveSignal) {
-        return moveSignal >= 4;
+        return moveSignal >= MOVE_THRESHOLD;
     }
 }
