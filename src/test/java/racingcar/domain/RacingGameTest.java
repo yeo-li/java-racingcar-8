@@ -68,4 +68,35 @@ class RacingGameTest {
         }
 
     }
+
+    @Nested
+    @DisplayName("toString() 테스트")
+    class ToStringTest {
+
+        @Test
+        @DisplayName("toString()이 각 자동차의 상태를 줄바꿈으로 연결하여 반환한다")
+        void 자동차_상태_출력_형식() {
+            // given
+            List<RacingCar> cars = List.of(
+                new RacingCar("pobi"),
+                new RacingCar("woni"),
+                new RacingCar("jun")
+            );
+            RacingGame game = new RacingGame(cars, 1);
+            String expected = "pobi : -\nwoni : -\njun : -\n";
+
+            // when
+            assertRandomNumberInRangeTest(
+                () -> {
+                    game.moveAllCars();
+                },
+                MOVING_FORWARD
+            );
+
+            String result = game.toString();
+
+            // then
+            assertThat(result).isEqualTo(expected);
+        }
+    }
 }
