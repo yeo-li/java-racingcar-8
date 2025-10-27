@@ -2,7 +2,7 @@ package racingcar.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-public class RacingCar {
+public class RacingCar implements Comparable<RacingCar> {
 
     private static final int MIN_RANDOM = 0;
     private static final int MAX_RANDOM = 9;
@@ -13,7 +13,7 @@ public class RacingCar {
 
 
     public RacingCar(String name) {
-        
+
         this.name = name;
         this.distance = 0;
     }
@@ -39,6 +39,11 @@ public class RacingCar {
     private boolean canMove(int moveSignal) {
 
         return moveSignal >= MOVE_THRESHOLD;
+    }
+
+    @Override
+    public int compareTo(RacingCar racingCar) {
+        return Integer.compare(this.distance, racingCar.distance);
     }
 
     @Override

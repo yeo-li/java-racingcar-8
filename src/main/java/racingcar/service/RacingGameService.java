@@ -1,6 +1,8 @@
 package racingcar.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import racingcar.domain.RacingCar;
 import racingcar.domain.RacingGame;
 
 public class RacingGameService {
@@ -10,5 +12,28 @@ public class RacingGameService {
         game.race();
 
         return game.getRoundResults();
+    }
+
+    public List<RacingCar> calculateWinners(List<RacingCar> racingCars) {
+
+        List<RacingCar> winners = new ArrayList<>();
+        for (RacingCar racingCar : racingCars) {
+            if (isWinner(racingCar, racingCars)) {
+                winners.add(racingCar);
+            }
+        }
+
+        return winners;
+    }
+
+    private boolean isWinner(RacingCar racingCar, List<RacingCar> racingCars) {
+
+        for (RacingCar car : racingCars) {
+            if (racingCar.compareTo(car) < 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
