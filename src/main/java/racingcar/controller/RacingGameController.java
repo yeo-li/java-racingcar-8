@@ -11,10 +11,18 @@ import racingcar.view.OutputView;
 
 public class RacingGameController {
 
-    private final InputView inputView = new InputView();
-    private final OutputView outputView = new OutputView();
-    private final RacingGameInputService racingGameInputService = new RacingGameInputService();
-    private final RacingGameService racingGameService = new RacingGameService();
+    private final InputView inputView;
+    private final OutputView outputView;
+    private final RacingGameInputService racingGameInputService;
+    private final RacingGameService racingGameService;
+
+    public RacingGameController(InputView inputView, OutputView outputView,
+        RacingGameInputService racingGameInputService, RacingGameService racingGameService) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+        this.racingGameInputService = racingGameInputService;
+        this.racingGameService = racingGameService;
+    }
 
     public void run() {
         RacingGameInputDto input = readUserInputs();
