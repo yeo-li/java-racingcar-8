@@ -7,6 +7,8 @@ import racingcar.domain.RacingGame;
 
 public class RacingGameService {
 
+    private static final int COMPARE_STANDARD = 0;
+
     public List<String> race(RacingGame game) {
 
         game.race();
@@ -29,7 +31,7 @@ public class RacingGameService {
     private boolean isWinner(RacingCar racingCar, List<RacingCar> racingCars) {
 
         for (RacingCar car : racingCars) {
-            if (racingCar.compareTo(car) < 0) {
+            if (racingCar.compareTo(car) < COMPARE_STANDARD) {
                 return false;
             }
         }
