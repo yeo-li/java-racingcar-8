@@ -1,14 +1,17 @@
 package racingcar.view;
 
 import java.util.List;
-import racingcar.domain.RacingCar;
 
 public class OutputView {
 
-    public void printRacingStatus(List<RacingCar> racingCars) {
+    private static final String RACING_RESULT_HEADER = "실행 결과";
 
-        for (RacingCar racingCar : racingCars) {
-            System.out.println(racingCar.toString());
+    public void printRacingResult(List<String> racingResult) {
+
+        System.out.println(RACING_RESULT_HEADER);
+        for (String round : racingResult) {
+            System.out.println(round);
+            System.out.println();
         }
     }
 
