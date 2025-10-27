@@ -43,9 +43,9 @@ public class RacingCarValidator {
         }
     }
 
-    private static void validateNoDuplicateNames(String[] arr) {
+    private static void validateNoDuplicateNames(String[] carNames) {
 
-        if (Arrays.stream(arr).distinct().count() < arr.length) {
+        if (Arrays.stream(carNames).distinct().count() < carNames.length) {
             throw new IllegalArgumentException(ExceptionMessage.DUPLICATE_CAR_NAME.getMessage());
         }
     }
