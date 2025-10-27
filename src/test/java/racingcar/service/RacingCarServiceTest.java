@@ -5,12 +5,15 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import java.util.List;
 import java.util.stream.Stream;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import racingcar.domain.RacingCar;
 
 class RacingCarServiceTest {
@@ -115,4 +118,68 @@ class RacingCarServiceTest {
                 .hasMessageContaining("자동차 이름은 알파벳만 가능합니다.");
         }
     }
+
+    @Nested
+    @DisplayName("saveAttemptCount() 메서드")
+    class SaveAttemptCountTest {
+
+        @ParameterizedTest
+        @DisplayName("시도 횟수 저장 - 성공")
+        @CsvSource({
+            "3, 3",
+            "4, 4",
+            "100, 100",
+            "0, 0",
+            "   10  , 10",
+            "10000, 10000"
+        })
+        void 시도_횟수_저장_성공(String input, int expected) {
+
+            // when
+            int actual = racingCarService.SaveAttemptCount(input);
+
+            // then
+            Assertions.assertThat(actual).isEqualTo(expected);
+        }
+
+        @ParameterizedTest
+        @DisplayName("시도 횟수 저장 - 시도 횟수 입력값에 숫자를 제외한 다른 값이 있는 경우")
+        @ValueSource(strings = {"12a3, 123a, 89=9, 5!, 1.5"})
+        void 시도_횟수_입력값에_숫자를_제외한_다른_값이_있는_경우(String input) {
+            // when & then
+            assertThatThrownBy(() -> {
+                racingCarService.SaveAttemptCount(input);
+            })
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("");
+        }
+
+        @ParameterizedTest
+        @DisplayName("시도 횟수 저장 - 입력 값이 0 미만 10,000 초과의 정수인 경우")
+        @ValueSource(strings = {
+            "-1", "10001", "10000000000000000000",
+            "-1000000000000000000000000000000000000000000000000000000"})
+        void 입력_값이_범위를_초과하는_정수인_경우(String input) {
+            // when & then
+            assertThatThrownBy(() -> {
+                racingCarService.SaveAttemptCount(input);
+            })
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("");
+        }
+
+        @ParameterizedTest
+        @DisplayName("시도 횟수 저장 - \"\", \" \" 처럼 공백을 입력한 경우(아무것도 입력하지 않은 경우)")
+        @ValueSource(strings = {"", " ", "  "})
+        void 시도_횟수에_공백을_입력한_경우(String input) {
+            // when & then
+            assertThatThrownBy(() -> {
+                racingCarService.SaveAttemptCount(input);
+            })
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("");
+        }
+
+    }
+
 }

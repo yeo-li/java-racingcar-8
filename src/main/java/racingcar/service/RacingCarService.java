@@ -18,4 +18,9 @@ public class RacingCarService {
         return racingCarConverter.convertRacingCarList(carNames);
     }
 
+    public int SaveAttemptCount(String input) {
+
+        return 0;
+    }
+
 }
