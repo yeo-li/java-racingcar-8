@@ -9,10 +9,13 @@ public class RacingGameService {
 
     private static final int COMPARE_STANDARD = 0;
 
+    public RacingGame createRacingGame(List<RacingCar> racingCars, int attemptCount) {
+        return new RacingGame(racingCars, attemptCount);
+    }
+
     public List<String> race(RacingGame game) {
 
         game.race();
-
         return game.getRoundResults();
     }
 

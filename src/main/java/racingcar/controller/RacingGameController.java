@@ -17,17 +17,17 @@ public class RacingGameController {
 
     public void run() {
         String carNamesInput = inputView.inputCarNames();
-        List<RacingCar> carNames = racingCarService.registerCars(carNamesInput);
-        
+        List<RacingCar> racingCars = racingCarService.registerCars(carNamesInput);
+
         String tryCountInput = inputView.inputTryCount();
         int attemptCount = racingCarService.SaveAttemptCount(tryCountInput);
 
-        RacingGame game = new RacingGame(carNames, attemptCount);
+        RacingGame game = racingGameService.createRacingGame(racingCars, attemptCount);
 
         List<String> gameResult = racingGameService.race(game);
         outputView.printRacingResult(gameResult);
 
-        List<RacingCar> winners = racingGameService.calculateWinners(carNames);
+        List<RacingCar> winners = racingGameService.calculateWinners(racingCars);
         outputView.printWinners(winners);
     }
 }
