@@ -15,7 +15,7 @@ class RacingCarTest {
     private static final int STOP = 3;
 
     @Nested
-    @DisplayName("moveForward() 메서드")
+    @DisplayName("moveForward() 테스트")
     class MoveForwardTest {
 
         @Test
@@ -55,5 +55,34 @@ class RacingCarTest {
         }
     }
 
+    @Nested
+    @DisplayName("toString() 테스트")
+    class ToStringTest {
+
+        @Test
+        @DisplayName("객체 상태 String으로 변환 성공")
+        void 변환_성공() {
+            // given
+            String input = "yeoli";
+            RacingCar racingCar = new RacingCar(input);
+            String expected = "yeoli : ---";
+
+            // when
+            for (int i = 0; i < 3; i++) {
+                assertRandomNumberInRangeTest(
+                    () -> racingCar.moveForward(),
+                    MOVING_FORWARD
+                );
+                assertRandomNumberInRangeTest(
+                    () -> racingCar.moveForward(),
+                    STOP
+                );
+            }
+            String actual = racingCar.toString();
+
+            // then
+            assertThat(actual).isEqualTo(expected);
+        }
+    }
 
 }
