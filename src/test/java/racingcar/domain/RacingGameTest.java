@@ -99,4 +99,37 @@ class RacingGameTest {
             assertThat(result).isEqualTo(expected);
         }
     }
+
+    @Nested
+    @DisplayName("race() 테스트")
+    class RaceTest {
+
+        @Test
+        @DisplayName("race() 실행 시 시도 횟수만큼 자동차 상태가 roundResults에 누적된다")
+        void race_시도_횟수만큼_자동차_상태_누적() {
+            // given
+            List<RacingCar> cars = List.of(
+                new RacingCar("pobi"),
+                new RacingCar("woni"),
+                new RacingCar("jun")
+            );
+            int attemptCount = 2;
+            RacingGame game = new RacingGame(cars, attemptCount);
+            List<String> expected = List.of("pobi : -\nwoni : -\njun : -\n",
+                "pobi : --\nwoni : --\njun : --\n");
+
+            // when
+            assertRandomNumberInRangeTest(
+                () -> {
+                    game.race();
+                },
+                MOVING_FORWARD
+            );
+
+            // then
+            List<String> roundResults = game.getRoundResults();
+            assertThat(roundResults).hasSize(attemptCount);
+            assertThat(roundResults).containsExactlyElementsOf(expected);
+        }
+    }
 }
