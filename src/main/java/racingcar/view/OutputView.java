@@ -13,7 +13,6 @@ public class OutputView {
         System.out.println(RACING_RESULT_HEADER);
         for (String round : racingResult) {
             System.out.println(round);
-            System.out.println();
         }
     }
 
