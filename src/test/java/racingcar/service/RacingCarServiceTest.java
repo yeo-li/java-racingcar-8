@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import racingcar.domain.RacingCar;
+import racingcar.exception.ExceptionMessage;
 
 class RacingCarServiceTest {
 
@@ -59,7 +60,7 @@ class RacingCarServiceTest {
                 racingCarService.registerCars(input);
             })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름은 5글자를 초과할 수 없습니다.");
+                .hasMessageContaining(ExceptionMessage.TOO_LONG_CAR_NAME.getMessage());
         }
 
         @Test
@@ -73,7 +74,7 @@ class RacingCarServiceTest {
                 racingCarService.registerCars(input);
             })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름은 중복 될 수 없습니다.");
+                .hasMessageContaining(ExceptionMessage.DUPLICATE_CAR_NAME.getMessage());
         }
 
         @Test
@@ -87,7 +88,7 @@ class RacingCarServiceTest {
                 racingCarService.registerCars(input);
             })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름은 공백이 불가능 합니다.");
+                .hasMessageContaining(ExceptionMessage.BLANK_CAR_NAME.getMessage());
         }
 
         @Test
@@ -101,7 +102,7 @@ class RacingCarServiceTest {
                 racingCarService.registerCars(input);
             })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름이 입력되지 않았습니다.");
+                .hasMessageContaining(ExceptionMessage.EMPTY_CAR_NAME.getMessage());
         }
 
         @Test
@@ -115,7 +116,7 @@ class RacingCarServiceTest {
                 racingCarService.registerCars(input);
             })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름은 알파벳만 가능합니다.");
+                .hasMessageContaining(ExceptionMessage.INVALID_CAR_NAME.getMessage());
         }
     }
 
@@ -151,7 +152,7 @@ class RacingCarServiceTest {
                 racingCarService.SaveAttemptCount(input);
             })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("시도 횟수에는 숫자만 입력할 수 있습니다.");
+                .hasMessageContaining(ExceptionMessage.NON_NUMERIC_ATTEMPT_COUNT.getMessage());
         }
 
         @ParameterizedTest
@@ -165,7 +166,7 @@ class RacingCarServiceTest {
                 racingCarService.SaveAttemptCount(input);
             })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("시도 횟수의 범위를 초과했습니다.");
+                .hasMessageContaining(ExceptionMessage.OUT_OF_RANGE_ATTEMPT_COUNT.getMessage());
         }
 
         @ParameterizedTest
@@ -177,7 +178,7 @@ class RacingCarServiceTest {
                 racingCarService.SaveAttemptCount(input);
             })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("시도 횟수가 입력되지 않았습니다.");
+                .hasMessageContaining(ExceptionMessage.EMPTY_ATTEMPT_COUNT.getMessage());
         }
 
     }
