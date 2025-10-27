@@ -15,6 +15,9 @@ public class RacingGame {
 
     public void moveAllCars() {
 
+        for (RacingCar racingCar : racingCars) {
+            racingCar.moveForward();
+        }
     }
 
     @Override
