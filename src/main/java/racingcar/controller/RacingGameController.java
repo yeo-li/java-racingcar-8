@@ -4,7 +4,7 @@ import java.util.List;
 import racingcar.domain.RacingCar;
 import racingcar.domain.RacingGame;
 import racingcar.dto.RacingGameInputDto;
-import racingcar.service.RacingCarService;
+import racingcar.service.RacingGameInputService;
 import racingcar.service.RacingGameService;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
@@ -13,11 +13,10 @@ public class RacingGameController {
 
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
-    private final RacingCarService racingCarService = new RacingCarService();
+    private final RacingGameInputService racingGameInputService = new RacingGameInputService();
     private final RacingGameService racingGameService = new RacingGameService();
 
     public void run() {
-
         RacingGameInputDto input = readUserInputs();
         RacingGame game = racingGameService.createRacingGame(
             input.getRacingCars(), input.getAttemptCount()
@@ -28,10 +27,10 @@ public class RacingGameController {
 
     private RacingGameInputDto readUserInputs() {
         String carNames = inputView.inputCarNames();
-        List<RacingCar> cars = racingCarService.registerCars(carNames);
+        List<RacingCar> cars = racingGameInputService.registerCars(carNames);
 
         String tryCount = inputView.inputTryCount();
-        int attemptCount = racingCarService.SaveAttemptCount(tryCount);
+        int attemptCount = racingGameInputService.saveAttemptCount(tryCount);
 
         return new RacingGameInputDto(cars, attemptCount);
     }

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class ParserTest {
 
     @Nested
-    @DisplayName("parseInput() 메서드")
+    @DisplayName("parseInput() 테스트")
     class ParseInputTest {
 
         @Test
@@ -55,7 +55,7 @@ class ParserTest {
     }
 
     @Nested
-    @DisplayName("removeAllSpaces() 메서드")
+    @DisplayName("removeAllSpaces() 테스트")
     class RemoveAllSpacesTest {
 
         @Test

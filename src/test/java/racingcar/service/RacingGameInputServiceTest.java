@@ -17,12 +17,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 import racingcar.domain.RacingCar;
 import racingcar.exception.ExceptionMessage;
 
-class RacingCarServiceTest {
+class RacingGameInputServiceTest {
 
-    private final RacingCarService racingCarService = new RacingCarService();
+    private final RacingGameInputService racingGameInputService = new RacingGameInputService();
 
     @Nested
-    @DisplayName("RegisterCars() 메서드")
+    @DisplayName("RegisterCars() 테스트")
     class RegisterCarsTest {
 
         static Stream<Arguments> provideNameLists() {
@@ -39,7 +39,7 @@ class RacingCarServiceTest {
         void 자동차_등록_성공(String input, List<String> expectedNames) {
 
             // when
-            List<RacingCar> racingCars = racingCarService.registerCars(input);
+            List<RacingCar> racingCars = racingGameInputService.registerCars(input);
 
             List<String> resultNames = racingCars.stream()
                 .map(RacingCar::getName)
@@ -57,7 +57,7 @@ class RacingCarServiceTest {
 
             // when & then
             assertThatThrownBy(() -> {
-                racingCarService.registerCars(input);
+                racingGameInputService.registerCars(input);
             })
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.TOO_LONG_CAR_NAME.getMessage());
@@ -71,7 +71,7 @@ class RacingCarServiceTest {
 
             // when & then
             assertThatThrownBy(() -> {
-                racingCarService.registerCars(input);
+                racingGameInputService.registerCars(input);
             })
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.DUPLICATE_CAR_NAME.getMessage());
@@ -85,7 +85,7 @@ class RacingCarServiceTest {
 
             // when & then
             assertThatThrownBy(() -> {
-                racingCarService.registerCars(input);
+                racingGameInputService.registerCars(input);
             })
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.BLANK_CAR_NAME.getMessage());
@@ -99,7 +99,7 @@ class RacingCarServiceTest {
 
             // when & then
             assertThatThrownBy(() -> {
-                racingCarService.registerCars(input);
+                racingGameInputService.registerCars(input);
             })
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.EMPTY_CAR_NAME.getMessage());
@@ -113,7 +113,7 @@ class RacingCarServiceTest {
 
             // when & then
             assertThatThrownBy(() -> {
-                racingCarService.registerCars(input);
+                racingGameInputService.registerCars(input);
             })
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.INVALID_CAR_NAME.getMessage());
@@ -121,7 +121,7 @@ class RacingCarServiceTest {
     }
 
     @Nested
-    @DisplayName("saveAttemptCount() 메서드")
+    @DisplayName("saveAttemptCount() 테스트")
     class SaveAttemptCountTest {
 
         @ParameterizedTest
@@ -137,7 +137,7 @@ class RacingCarServiceTest {
         void 시도_횟수_저장_성공(String input, int expected) {
 
             // when
-            int actual = racingCarService.SaveAttemptCount(input);
+            int actual = racingGameInputService.saveAttemptCount(input);
 
             // then
             Assertions.assertThat(actual).isEqualTo(expected);
@@ -149,7 +149,7 @@ class RacingCarServiceTest {
         void 시도_횟수_입력값에_숫자를_제외한_다른_값이_있는_경우(String input) {
             // when & then
             assertThatThrownBy(() -> {
-                racingCarService.SaveAttemptCount(input);
+                racingGameInputService.saveAttemptCount(input);
             })
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.NON_NUMERIC_ATTEMPT_COUNT.getMessage());
@@ -163,7 +163,7 @@ class RacingCarServiceTest {
         void 입력_값이_범위를_초과하는_정수인_경우(String input) {
             // when & then
             assertThatThrownBy(() -> {
-                racingCarService.SaveAttemptCount(input);
+                racingGameInputService.saveAttemptCount(input);
             })
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.OUT_OF_RANGE_ATTEMPT_COUNT.getMessage());
@@ -175,7 +175,7 @@ class RacingCarServiceTest {
         void 시도_횟수에_공백을_입력한_경우(String input) {
             // when & then
             assertThatThrownBy(() -> {
-                racingCarService.SaveAttemptCount(input);
+                racingGameInputService.saveAttemptCount(input);
             })
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.EMPTY_ATTEMPT_COUNT.getMessage());

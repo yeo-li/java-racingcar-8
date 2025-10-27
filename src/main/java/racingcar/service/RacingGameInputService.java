@@ -6,7 +6,7 @@ import racingcar.domain.RacingCar;
 import racingcar.util.Parser;
 import racingcar.validator.RacingCarValidator;
 
-public class RacingCarService {
+public class RacingGameInputService {
 
     private final RacingCarConverter racingCarConverter = new RacingCarConverter();
 
@@ -18,7 +18,7 @@ public class RacingCarService {
         return racingCarConverter.convertRacingCarList(carNames);
     }
 
-    public int SaveAttemptCount(String input) {
+    public int saveAttemptCount(String input) {
 
         String cleanedInput = Parser.removeAllSpaces(input);
         RacingCarValidator.validateAttemptCount(cleanedInput);
