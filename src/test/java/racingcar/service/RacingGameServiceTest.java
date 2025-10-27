@@ -48,4 +48,65 @@ class RacingGameServiceTest {
             );
         }
     }
+
+    @Nested
+    @DisplayName("calculateWinners() 테스트")
+    class CalculateWinnersTest {
+
+        @Test
+        @DisplayName("자동차 경주 결과 계산 - 우승자 한 명")
+        void 우승자_한_명() {
+            // given
+            List<RacingCar> cars = List.of(
+                new RacingCar("pobi"),
+                new RacingCar("woni"),
+                new RacingCar("jun")
+            );
+
+            // when
+            assertRandomNumberInRangeTest(
+                () -> {
+                    cars.get(0).moveForward();
+                    cars.get(0).moveForward();
+                    cars.get(1).moveForward();
+                    cars.get(2).moveForward();
+                },
+                MOVING_FORWARD, MOVING_FORWARD, STOP, MOVING_FORWARD
+            );
+
+            List<RacingCar> racingCars = racingGameService.calculateWinners(cars);
+
+            // then
+            String expected = "pobi";
+            assertThat(racingCars.getFirst().getName()).isEqualTo(expected);
+        }
+
+        @Test
+        @DisplayName("자동차 경주 결과 계산 - 우승자 두 명")
+        void 우승자_두_명() {
+            // given
+            List<RacingCar> cars = List.of(
+                new RacingCar("pobi"),
+                new RacingCar("woni"),
+                new RacingCar("jun")
+            );
+
+            // when
+            assertRandomNumberInRangeTest(
+                () -> {
+                    cars.get(0).moveForward();
+                    cars.get(0).moveForward();
+                    cars.get(2).moveForward();
+                    cars.get(2).moveForward();
+                },
+                MOVING_FORWARD, MOVING_FORWARD, MOVING_FORWARD, MOVING_FORWARD
+            );
+
+            List<RacingCar> racingCars = racingGameService.calculateWinners(cars);
+
+            // then
+            String expected = "pobi, jun";
+            assertThat(racingCars.getFirst().getName()).isEqualTo(expected);
+        }
+    }
 }
