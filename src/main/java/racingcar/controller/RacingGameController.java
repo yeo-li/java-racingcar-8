@@ -26,13 +26,13 @@ public class RacingGameController {
     }
 
     private RacingGameInputDto readUserInputs() {
-        String carNames = inputView.inputCarNames();
-        List<RacingCar> cars = racingGameInputService.registerCars(carNames);
+        String racingCarsInput = inputView.inputCarNames();
+        List<RacingCar> racingCars = racingGameInputService.registerCars(racingCarsInput);
 
-        String tryCount = inputView.inputTryCount();
-        int attemptCount = racingGameInputService.saveAttemptCount(tryCount);
+        String attemptCountInput = inputView.inputTryCount();
+        int attemptCount = racingGameInputService.saveAttemptCount(attemptCountInput);
 
-        return new RacingGameInputDto(cars, attemptCount);
+        return new RacingGameInputDto(racingCars, attemptCount);
     }
 
     private List<String> executeRace(RacingGame game) {
