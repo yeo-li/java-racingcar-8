@@ -144,28 +144,28 @@ class RacingCarServiceTest {
 
         @ParameterizedTest
         @DisplayName("시도 횟수 저장 - 시도 횟수 입력값에 숫자를 제외한 다른 값이 있는 경우")
-        @ValueSource(strings = {"12a3, 123a, 89=9, 5!, 1.5"})
+        @ValueSource(strings = {"-1", "12 a3, 123a, 89=9, 5!, 1.5"})
         void 시도_횟수_입력값에_숫자를_제외한_다른_값이_있는_경우(String input) {
             // when & then
             assertThatThrownBy(() -> {
                 racingCarService.SaveAttemptCount(input);
             })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("");
+                .hasMessageContaining("시도 횟수에는 숫자만 입력할 수 있습니다.");
         }
 
         @ParameterizedTest
         @DisplayName("시도 횟수 저장 - 입력 값이 0 미만 10,000 초과의 정수인 경우")
         @ValueSource(strings = {
-            "-1", "10001", "10000000000000000000",
-            "-1000000000000000000000000000000000000000000000000000000"})
+            "10001", "10000000000000000000",
+            "1000000000000000000000000000000000000000000000000000000"})
         void 입력_값이_범위를_초과하는_정수인_경우(String input) {
             // when & then
             assertThatThrownBy(() -> {
                 racingCarService.SaveAttemptCount(input);
             })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("");
+                .hasMessageContaining("시도 횟수의 범위를 초과했습니다.");
         }
 
         @ParameterizedTest
@@ -177,7 +177,7 @@ class RacingCarServiceTest {
                 racingCarService.SaveAttemptCount(input);
             })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("");
+                .hasMessageContaining("시도 횟수가 입력되지 않았습니다.");
         }
 
     }
