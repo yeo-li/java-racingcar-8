@@ -78,6 +78,7 @@ class RacingGameServiceTest {
 
             // then
             String expected = "pobi";
+            assertThat(racingCars.size()).isEqualTo(1);
             assertThat(racingCars.getFirst().getName()).isEqualTo(expected);
         }
 
@@ -105,8 +106,11 @@ class RacingGameServiceTest {
             List<RacingCar> racingCars = racingGameService.calculateWinners(cars);
 
             // then
-            String expected = "pobi, jun";
-            assertThat(racingCars.getFirst().getName()).isEqualTo(expected);
+            String expected1 = "pobi";
+            String expected2 = "jun";
+            assertThat(racingCars.size()).isEqualTo(2);
+            assertThat(racingCars.getFirst().getName()).isEqualTo(expected1);
+            assertThat(racingCars.get(1).getName()).isEqualTo(expected2);
         }
     }
 }
