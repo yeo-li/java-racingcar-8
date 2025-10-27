@@ -83,14 +83,14 @@ class RacingGameTest {
                 new RacingCar("jun")
             );
             RacingGame game = new RacingGame(cars, 1);
-            String expected = "pobi : -\nwoni : -\njun : -\n";
+            String expected = "pobi : -\nwoni : \njun : -\n";
 
             // when
             assertRandomNumberInRangeTest(
                 () -> {
                     game.moveAllCars();
                 },
-                MOVING_FORWARD
+                MOVING_FORWARD, STOP, MOVING_FORWARD
             );
 
             String result = game.toString();
@@ -123,7 +123,8 @@ class RacingGameTest {
                 () -> {
                     game.race();
                 },
-                MOVING_FORWARD
+                MOVING_FORWARD, MOVING_FORWARD, MOVING_FORWARD,
+                MOVING_FORWARD, MOVING_FORWARD, MOVING_FORWARD
             );
 
             // then
