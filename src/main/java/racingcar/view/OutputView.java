@@ -7,6 +7,7 @@ public class OutputView {
 
     public static final String STATUS_RESULT_MESSAGE = "실행 결과";
     public static final String PRINT_WINNER_PREFIX_MESSAGE = "최종 우승자 : ";
+    public static final String PRINT_WINNER_LINK = ", ";
 
     public void printStatusResultMessage() {
         System.out.println(STATUS_RESULT_MESSAGE);
@@ -26,7 +27,7 @@ public class OutputView {
             if (i + 1 == winners.size()) {
                 break;
             }
-            System.out.print(", ");
+            System.out.print(PRINT_WINNER_LINK);
         }
     }
 }

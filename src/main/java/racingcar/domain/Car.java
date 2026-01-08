@@ -1,6 +1,7 @@
 package racingcar.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import racingcar.constant.NumberConstant;
 import racingcar.validator.CarNameValidator;
 
 public class Car {
@@ -33,7 +34,8 @@ public class Car {
     }
 
     private boolean canMove() {
-        int random = Randoms.pickNumberInRange(0, 9);
-        return random >= 4;
+        int random = Randoms.pickNumberInRange(NumberConstant.RANDOM_MIN_VALUE.getConstant(),
+            NumberConstant.RANDOM_MAX_VALUE.getConstant());
+        return random >= NumberConstant.CAN_MOVE.getConstant();
     }
 }

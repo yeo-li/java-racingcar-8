@@ -10,7 +10,7 @@ import racingcar.domain.Car;
 
 class RacingCarServiceTest {
 
-    private RacingCarService racingCarService = new RacingCarService();
+    private final RacingCarService racingCarService = new RacingCarService();
 
     public static final int MOVING_FORWARD = 4;
     private static final int STOP = 3;

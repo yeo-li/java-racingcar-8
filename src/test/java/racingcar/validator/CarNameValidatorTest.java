@@ -27,7 +27,7 @@ class CarNameValidatorTest {
             CarNameValidator.validate(input);
         })
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining(ErrorMessage.INVALID_INPUT_ERROR_MESSAGE.getMessage());
+            .hasMessageContaining(ErrorMessage.CAR_NAME_LENGTH_EXCESS_ERROR_MESSAGE.getMessage());
     }
 
     @ParameterizedTest

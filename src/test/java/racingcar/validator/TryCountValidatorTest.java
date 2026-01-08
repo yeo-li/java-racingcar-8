@@ -27,7 +27,7 @@ class TryCountValidatorTest {
             TryCountValidator.validate(input);
         })
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining(ErrorMessage.INVALID_INPUT_ERROR_MESSAGE.getMessage());
+            .hasMessageContaining(ErrorMessage.TRY_COUNT_IS_NOT_NUMBER_ERROR_MESSAGE.getMessage());
     }
 
     @ParameterizedTest
@@ -38,7 +38,7 @@ class TryCountValidatorTest {
             TryCountValidator.validate(input);
         })
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining(ErrorMessage.INVALID_INPUT_ERROR_MESSAGE.getMessage());
+            .hasMessageContaining(ErrorMessage.TRY_COUNT_EXCESS_ERROR_MESSAGE.getMessage());
     }
 
     @ParameterizedTest
@@ -49,6 +49,6 @@ class TryCountValidatorTest {
             TryCountValidator.validate(input);
         })
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining(ErrorMessage.INVALID_INPUT_ERROR_MESSAGE.getMessage());
+            .hasMessageContaining(ErrorMessage.TRY_COUNT_IS_NOT_NUMBER_ERROR_MESSAGE.getMessage());
     }
 }

@@ -43,7 +43,7 @@ public class RacingCarController {
 
     private List<Car> race(List<Car> cars, int tryCnt) {
         outputView.printStatusResultMessage();
-        for (int i = 0; i < tryCnt; i++) {
+        for (int repeat = 0; repeat < tryCnt; repeat++) {
             racingCarService.race(cars);
             outputView.printRacingStatus(cars);
         }
