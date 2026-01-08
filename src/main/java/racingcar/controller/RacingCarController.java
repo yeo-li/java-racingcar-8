@@ -17,6 +17,7 @@ public class RacingCarController {
     public void start() {
         List<Car> cars = inputCarNames();
         int tryCount = inputTryCount();
+        race(cars, tryCount);
     }
 
     private List<Car> inputCarNames() {
@@ -34,5 +35,15 @@ public class RacingCarController {
         String input = inputView.inputTryCount();
         TryCountValidator.validate(input);
         return Integer.parseInt(input);
+    }
+
+    private void race(List<Car> cars, int tryCnt) {
+        outputView.printStatusResultMessage();
+        for (int i = 0; i < tryCnt; i++) {
+            for (Car car : cars) {
+                car.moveForward();
+            }
+            outputView.printRacingStatus(cars);
+        }
     }
 }
