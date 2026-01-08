@@ -5,8 +5,11 @@ import racingcar.domain.Car;
 
 public class OutputView {
 
+    public static final String STATUS_RESULT_MESSAGE = "실행 결과";
+    public static final String PRINT_WINNER_PREFIX_MESSAGE = "최종 우승자 : ";
+
     public void printStatusResultMessage() {
-        System.out.println("실행 결과");
+        System.out.println(STATUS_RESULT_MESSAGE);
     }
 
     public void printRacingStatus(List<Car> cars) {
@@ -17,7 +20,7 @@ public class OutputView {
     }
 
     public void printRacingWinners(List<Car> winners) {
-        System.out.print("최종 우승자 : ");
+        System.out.print(PRINT_WINNER_PREFIX_MESSAGE);
         for (int i = 0; i < winners.size(); i++) {
             System.out.print(winners.get(i).getName());
             if (i + 1 == winners.size()) {
