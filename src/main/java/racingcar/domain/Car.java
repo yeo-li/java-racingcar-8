@@ -1,13 +1,15 @@
 package racingcar.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import racingcar.validator.CarNameValidator;
 
 public class Car {
 
-    private String name;
+    private final String name;
     private int distance;
 
     public Car(String name) {
+        CarNameValidator.validate(name);
         this.name = name;
         this.distance = 0;
     }
