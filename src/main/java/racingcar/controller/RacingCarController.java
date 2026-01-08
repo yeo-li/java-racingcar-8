@@ -5,6 +5,7 @@ import java.util.List;
 import racingcar.domain.Car;
 import racingcar.util.Parser;
 import racingcar.validator.CarNameValidator;
+import racingcar.validator.TryCountValidator;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
@@ -15,6 +16,7 @@ public class RacingCarController {
 
     public void start() {
         List<Car> cars = inputCarNames();
+        int tryCount = inputTryCount();
     }
 
     private List<Car> inputCarNames() {
@@ -26,5 +28,11 @@ public class RacingCarController {
             cars.add(new Car(name));
         }
         return cars;
+    }
+
+    private int inputTryCount() {
+        String input = inputView.inputTryCount();
+        TryCountValidator.validate(input);
+        return Integer.parseInt(input);
     }
 }
