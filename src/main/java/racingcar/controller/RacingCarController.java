@@ -17,7 +17,9 @@ public class RacingCarController {
     public void start() {
         List<Car> cars = inputCarNames();
         int tryCount = inputTryCount();
-        race(cars, tryCount);
+        List<Car> endCars = race(cars, tryCount);
+        List<Car> winners = judgeWinners(endCars);
+        outputView.printRacingWinners(winners);
     }
 
     private List<Car> inputCarNames() {
@@ -37,7 +39,7 @@ public class RacingCarController {
         return Integer.parseInt(input);
     }
 
-    private void race(List<Car> cars, int tryCnt) {
+    private List<Car> race(List<Car> cars, int tryCnt) {
         outputView.printStatusResultMessage();
         for (int i = 0; i < tryCnt; i++) {
             for (Car car : cars) {
@@ -45,5 +47,18 @@ public class RacingCarController {
             }
             outputView.printRacingStatus(cars);
         }
+        return cars;
+    }
+
+    private List<Car> judgeWinners(List<Car> cars) {
+        List<Car> winners = new ArrayList<>();
+        cars.sort((o1, o2) -> o2.getDistance() - o1.getDistance());
+        int max = cars.getFirst().getDistance();
+        for (Car car : cars) {
+            if (max == car.getDistance()) {
+                winners.add(car);
+            }
+        }
+        return winners;
     }
 }
