@@ -10,10 +10,16 @@ import racingcar.view.OutputView;
 
 public class RacingCarController {
 
-    private final RacingCarService racingCarService = new RacingCarService();
+    private final RacingCarService racingCarService;
+    private final InputView inputView;
+    private final OutputView outputView;
 
-    private final InputView inputView = new InputView();
-    private final OutputView outputView = new OutputView();
+    public RacingCarController(RacingCarService racingCarService, InputView inputView,
+        OutputView outputView) {
+        this.racingCarService = racingCarService;
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
 
     public void start() {
         List<Car> cars = inputCarNames();
